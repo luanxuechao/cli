@@ -19,52 +19,22 @@ If anything feels off, or if you feel that some functionality is missing, please
 ## Installation
 
 ### macOS
-
-`gh` is available via [Homebrew][], [MacPorts][], and as a downloadable binary from the [releases page][].
-
 #### Homebrew
 
 | Install:          | Upgrade:          |
 | ----------------- | ----------------- |
 | `brew install gh` | `brew upgrade gh` |
 
-#### MacPorts
+```
+ make
+```
+```
+cp bin/gh /usr/local/Cellar/gh/1.4.0/bin/ (homebrew install folder)
+```
 
-| Install:               | Upgrade:                                       |
-| ---------------------- | ---------------------------------------------- |
-| `sudo port install gh` | `sudo port selfupdate && sudo port upgrade gh` |
-
-### Linux
-
-`gh` is available via [Homebrew](#homebrew), and as downloadable binaries from the [releases page][].
-
-For more information and distro-specific instructions, see the [Linux installation docs](./docs/install_linux.md).
-
-### Windows
-
-`gh` is available via [WinGet][], [scoop][], [Chocolatey][], and as downloadable MSI.
-
-
-#### WinGet
-
-| Install:            | Upgrade:            |
-| ------------------- | --------------------|
-| `winget install gh` | `winget install gh` |
-
-<i>WinGet does not have a specialized `upgrade` command yet, but the `install` command should work for upgrading to a newer version of GitHub CLI.</i>
-
-#### scoop
-
-| Install:           | Upgrade:           |
-| ------------------ | ------------------ |
-| `scoop install gh` | `scoop update gh`  |
-
-#### Chocolatey
-
-| Install:           | Upgrade:           |
-| ------------------ | ------------------ |
-| `choco install gh` | `choco upgrade gh` |
-
+```
+chmod +x /usr/local/Cellar/gh/1.4.0/bin/gh
+```
 #### Signed MSI
 
 MSI installers are available for download on the [releases page][].

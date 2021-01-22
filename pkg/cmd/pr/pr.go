@@ -10,6 +10,7 @@ import (
 	cmdDiff "github.com/cli/cli/pkg/cmd/pr/diff"
 	cmdList "github.com/cli/cli/pkg/cmd/pr/list"
 	cmdMerge "github.com/cli/cli/pkg/cmd/pr/merge"
+	cmdMonitor "github.com/cli/cli/pkg/cmd/pr/monitor"
 	cmdReady "github.com/cli/cli/pkg/cmd/pr/ready"
 	cmdReopen "github.com/cli/cli/pkg/cmd/pr/reopen"
 	cmdReview "github.com/cli/cli/pkg/cmd/pr/review"
@@ -55,6 +56,7 @@ func NewCmdPR(f *cmdutil.Factory) *cobra.Command {
 	cmd.AddCommand(cmdView.NewCmdView(f, nil))
 	cmd.AddCommand(cmdChecks.NewCmdChecks(f, nil))
 	cmd.AddCommand(cmdComment.NewCmdComment(f, nil))
+	cmd.AddCommand(cmdMonitor.NewCmdMonitor(f, nil))
 
 	return cmd
 }

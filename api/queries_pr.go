@@ -208,6 +208,40 @@ func (pr *PullRequest) ChecksStatus() (summary PullRequestChecksStatus) {
 	return
 }
 
+func (pr *PullRequest) BuildFinished() (finished bool) {
+	if len(pr.Commits.Nodes) == 0 {
+		return
+	}
+	finished = true
+	commit := pr.Commits.Nodes[0].Commit
+	for _, c := range commit.StatusCheckRollup.Contexts.Nodes {
+		state := c.State // StatusContext
+		if state == "" {
+			// CheckRun
+			if c.Status == "COMPLETED" {
+				state = c.Conclusion
+			} else {
+				state = c.Status
+			}
+		}
+		switch state {
+		case "SUCCESS", "NEUTRAL", "SKIPPED":
+			continue
+		case "ERROR", "FAILURE", "CANCELLED", "TIMED_OUT", "ACTION_REQUIRED":
+			continue
+		case "EXPECTED", "REQUESTED", "QUEUED", "PENDING", "IN_PROGRESS", "STALE":
+			if c.Context == "codacy/pr" || c.Context == "Codacy/PR Coverage Quality" {
+				continue
+			}
+			finished = false
+			return
+		default:
+			panic(fmt.Errorf("unsupported status: %q", state))
+		}
+	}
+	return
+}
+
 func (pr *PullRequest) DisplayableReviews() PullRequestReviews {
 	published := []PullRequestReview{}
 	for _, prr := range pr.Reviews.Nodes {
